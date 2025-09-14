@@ -3,18 +3,18 @@ import { BrowserRoute as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import BitcoinHomePage from "./components/BitcoinHomePage";
 import WatchlistPage from "./components/WatchlistPage";
+import AddCoinForm from "./components/AddCoinForm";
 
 function App() {
   const [watchlist, setWatchList] = useState([]);
 
   const addCoin = (coinName) => {
-    setWatchList();
+    //New coin added to the watchlist when pressed, whichever coin person adds to the watchlist, updates the state to the watchlist
+    setWatchList([...watchlist, coinName]);
   };
 
   return (
     <>
-      <p className="read-the-docs">To The Moon </p>
-
       {/* Enable routing for the navbar to the various page */}
       <Router>
         <Navbar />
@@ -26,10 +26,10 @@ function App() {
       </Router>
 
       <NavBar />
-      <BitcoinHomePage.jsx />
+      <BitcoinHomePage />
       {/* pass down props for watchlist and coinName function  */}
-      <WatchlistPage.jsx watchlist={watchlist} addCoin={addCoin} />
-      <AddCoinForm.jsx />
+      <WatchlistPage watchlist={watchlist} addCoin={addCoin} />
+      <AddCoinForm />
     </>
   );
 }
