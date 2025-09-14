@@ -1,7 +1,19 @@
 import React from "react";
+import AddCoinForm from "./AddCoinForm";
 
-function WatchlistPage() {
-  return <div>WatchlistPage</div>;
+//props from app.jsx
+function WatchlistPage({ watchlist, addCoin }) {
+  return (
+    <>
+      <h1>My Crypto Watchlist</h1>
+      <AddCoinForm addCoin={addCoin}></AddCoinForm>
+      <ul>
+        {watchlist.map((coinName, index) => (
+          <li key={index}>{coinName}</li>
+        ))}
+      </ul>
+    </>
+  );
 }
 
 export default WatchlistPage;

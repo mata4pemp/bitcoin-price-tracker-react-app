@@ -5,6 +5,12 @@ import BitcoinHomePage from "./components/BitcoinHomePage";
 import WatchlistPage from "./components/WatchlistPage";
 
 function App() {
+  const [watchlist, setWatchList] = useState([]);
+
+  const addCoin = (coinName) => {
+    setWatchList();
+  };
+
   return (
     <>
       <p className="read-the-docs">To The Moon </p>
@@ -21,7 +27,8 @@ function App() {
 
       <NavBar />
       <BitcoinHomePage.jsx />
-      <WatchlistPage.jsx />
+      {/* pass down props for watchlist and coinName function  */}
+      <WatchlistPage.jsx watchlist={watchlist} addCoin={addCoin} />
       <AddCoinForm.jsx />
     </>
   );

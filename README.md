@@ -7,81 +7,79 @@ Bitcoin Tracker App
 Bitcoin Tracker App is a simple React application that allows users to view Bitcoin metrics (price, market cap, 24h change) and add coins to a watchlist. The app demonstrates basic React concepts including state management, props, component structure, and routing.
 
 Key features:
-	•	Fetches live Bitcoin data from a public API
-	•	Allows users to add coins to a watchlist
-	•	Demonstrates lifted state and prop passing between components
-	•	Basic routing between pages
-------------------------------------------------------------------
+• Fetches live Bitcoin data from a public API
+• Allows users to add coins to a watchlist
+• Demonstrates lifted state and prop passing between components
+• Basic routing between pages
 
+---
 
 Screenshot:
 
-
-------------------------------------------------------------------
+---
 
 Live Demo:
 
- 
-------------------------------------------------------------------
-
+---
 
 Component
 
 1. App.jsx
-Root component, holds main state (bitcoin, watchlist)
+   Root component, holds main state (bitcoin, watchlist)
 
 2. NavBar.jsx
-Top navigation links
+   Top navigation links
 
 3. Home.jsx
-Displays Bitcoin metrics
+   Displays Bitcoin metrics
 
 4. Watchlist.jsx
-Shows coins in watchlist
+   Shows coins in watchlist
 
 5. AddCoinForm.jsx
-Form to add coins to watchlist
-addCoin
+   Form to add coins to watchlist
+   addCoin
 
-
-------------------------------------------------------------------
+---
 
 Props (4)
-	•	title → NavBar
-	•	bitcoin → Home
-	•	watchlist → Watchlist
-	•	addCoin → Watchlist & AddCoinForm
+• title → NavBar
+• bitcoin → Home
+• watchlist → Watchlist
+• addCoin → Watchlist & AddCoinForm
 
- State (useState) (2)
-	•	bitcoin → fetched from API
-	•	watchlist → lifted state shared with children
+State (useState) (2)
+• bitcoin → fetched from API
+• watchlist → lifted state shared with children
 
- React Router Routes (2)
-	•	/ → Home page
-	•	/watchlist → Watchlist page
+React Router Routes (2)
+• / → Home page
+• /watchlist → Watchlist page
 
- Lifted State (1)
-	•	watchlist is lifted to App.jsx
-	•	Passed down to Watchlist.jsx and AddCoinForm.jsx via props
-	•	Child components can update it via the addCoin handler
+Lifted State (1)
+• watchlist is lifted to App.jsx
+• Passed down to Watchlist.jsx and AddCoinForm.jsx via props
+• Child components can update it via the addCoin handler
 
-------------------------------------------------------------------
+---
 
- Technologies Used
-	•	React
-	•	React Router DOM
-	•	Fetch API
+Technologies Used
+• React
+• React Router DOM
+• Fetch API
+• Airtable (Act as database)
 
-------------------------------------------------------------------
+---
 
- Attributions
-	•	Coingecko API for Bitcoin price data
-	•	React documentation for component and state management
+Attributions
+• Coingecko API for Bitcoin price data
+• React documentation for component and state management
 
+---
 
-------------------------------------------------------------------
 # React + Vite
->>>>>>> b9757ff3da7d5401dfa6095951cd3b04443705b0
+
+> > > > > > > b9757ff3da7d5401dfa6095951cd3b04443705b0
 
 App Overview
 Bitcoin Tracker App is a simple React application that allows users to view Bitcoin metrics (price, market cap, 24h change) and add coins to a watchlist. The app demonstrates basic React concepts including state management, props, component structure, and routing.
@@ -125,14 +123,13 @@ Currently, two official plugins are available:
 Expanding the ESLint configuration
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the TS template for information on how to integrate TypeScript and typescript-eslint in your project.
 
---------------------------------------------------------
+---
 
 Component Hierarchy
 
 App.jsx (root)
-├─ NavBar.jsx   <-- navigation links
+├─ NavBar.jsx <-- navigation links
 ├─ Routes
-│    ├─ "/" → BitcoinHomePage.jsx (Bitcoin metrics)
-│    └─ "/watchlist" → WatchlistPage.jsx
-│         └─ AddCoinForm.jsx (inside Watchlist page)
-
+│ ├─ "/" → BitcoinHomePage.jsx (Bitcoin metrics)
+│ └─ "/watchlist" → WatchlistPage.jsx
+│ └─ AddCoinForm.jsx (inside Watchlist page)
