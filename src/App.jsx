@@ -7,13 +7,16 @@ import WatchlistPage from "./components/WatchlistPage";
 function App() {
   return (
     <>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <p className="read-the-docs">To The Moon </p>
 
+      {/* Enable routing for the navbar to the various page */}
       <Router>
         <Navbar />
-        <Routes></Routes>
+        <Routes>
+          {/* //route to the specific URL and show the associated component */}
+          <Route path="/" element={<BitcoinHomePage />} />
+          <Route path="/watchlist" element={<WatchlistPage />} />
+        </Routes>
       </Router>
 
       <NavBar />
