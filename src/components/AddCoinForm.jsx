@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 
 function AddCoinForm() {
   const [coinName, setCoinName] = useState("");

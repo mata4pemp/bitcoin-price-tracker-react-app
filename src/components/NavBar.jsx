@@ -5,10 +5,10 @@ function NavBar() {
     <nav>
       <ul>
         <li>
-          <link to="/">Bitcoin Price</link>
+          <Link to="/">Bitcoin Price</Link>
         </li>
         <li>
-          <link to="/watchlist">Watchlist</link>
+          <Link to="/watchlist">Watchlist</Link>
         </li>
       </ul>
     </nav>

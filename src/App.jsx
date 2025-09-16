@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { BrowserRoute as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import BitcoinHomePage from "./components/BitcoinHomePage";
 import WatchlistPage from "./components/WatchlistPage";
-import AddCoinForm from "./components/AddCoinForm";
 
 function App() {
   const [watchlist, setWatchList] = useState([]);
@@ -16,20 +15,22 @@ function App() {
   return (
     <>
       {/* Enable routing for the navbar to the various page */}
-      <Router>
-        <Navbar />
-        <Routes>
-          {/* //route to the specific URL and show the associated component */}
-          <Route path="/" element={<BitcoinHomePage />} />
-          <Route path="/watchlist" element={<WatchlistPage />} />
-        </Routes>
-      </Router>
 
+      {/* Stays on every page, lives outside routes */}
       <NavBar />
-      <BitcoinHomePage />
-      {/* pass down props for watchlist and coinName function  */}
-      <WatchlistPage watchlist={watchlist} addCoin={addCoin} />
-      <AddCoinForm />
+      <Routes>
+        {/* //route to the specific URL and show the associated component */}
+        <Route path="/" element={<BitcoinHomePage />} />
+        <Route
+          path="/watchlist"
+          element={
+            <>
+              {/* pass down props for watchlist and coinName function  */}
+              <WatchlistPage watchlist={watchlist} addCoin={addCoin} />
+            </>
+          }
+        />
+      </Routes>
     </>
   );
 }
