@@ -11,6 +11,7 @@ export const handleUpdateAirtable = async (newData) => {
       body: JSON.stringify(newData),
     });
     const data = await res.json();
+    return res;
   } catch (error) {
     console.log(error.message);
   }

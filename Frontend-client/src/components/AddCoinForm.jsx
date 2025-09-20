@@ -26,8 +26,9 @@ function AddCoinForm({ addCoin }) {
   //when form submits, this happens
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log(coinName);
     const coin = coinName.trim().toLowerCase();
+    console.log(coin)
 
     if (!coin) return; //prevents empty submit on the form
 

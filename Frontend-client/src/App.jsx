@@ -22,7 +22,9 @@ function App() {
     }
 
     //add new coin to the previous coins in watchlist, prev = current list of coins in the watchlist
+    console.log(watchlist);
     setWatchList((prev) => [...prev, coinName]);
+    console.log(watchlist);
 
     //push the coin to Airtable
     try {
@@ -31,10 +33,11 @@ function App() {
         "React Project - Bitcoin Price Tracker"
       );
 
-      if (result) {
+      
+      if (result.ok) {
         console.log("Coin successfuly added to airtable", result);
       } else {
-        console.error("failed to save coin to airatble");
+        console.error("failed to save coin to airatble", result);
       }
     } catch (error) {
       console.log("error adding coin to aritable", error);
