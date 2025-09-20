@@ -34,6 +34,8 @@ app.get("/api/coins/:coinId", async (req, res) => {
       `${COINGECKO_BASE_URL}/simple/price?ids=${coinId}&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true`
     );
 
+    console.log(response);
+
     if (!response.ok) {
       throw new Error("Failed to fetch coin data");
     }
@@ -69,21 +71,26 @@ app.get("/api/search/coins", async (req, res) => {
 // Endpoint 1: Add coin to watchlist, send coin to airtable DB table
 app.post("/airtable/send", async (req, res) => {
   try {
+    console.log(req.body)
+    const coinData = req.body;
     //want to POST send data to airtable to create new row in table
-    const response = await fetch(`${BASE_URL}/${TABLE_NAME}`, {
-      method: "POST",
-      //tell airtable who we are , sending JSON data over
-      headers: {
-        Authorization: `Bearer ${AIRTABLE_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      //crypto coin name data convert from JS object to JSON string
-      body: JSON.stringify({
-        fields: {
-          Name: coinData.name,
+    const response = await fetch(
+      `${AIRTABLE_BASE_URL}/${AIRTABLE_TABLE_NAME}`,
+      {
+        method: "POST",
+        //tell airtable who we are , sending JSON data over
+        headers: {
+          Authorization: `Bearer ${AIRTABLE_API_KEY}`,
+          "Content-Type": "application/json",
         },
-      }),
-    });
+        //crypto coin name data convert from JS object to JSON string
+        body: JSON.stringify({
+          fields: {
+            Name: coinData.name,
+          },
+        }),
+      }
+    );
 
     const data = await response.json();
 
@@ -121,7 +128,7 @@ app.get("/api/watchlist", async (req, res) => {
       }
     );
 
-    console.log(response)
+    console.log(response);
 
     if (!response.ok) {
       throw new Error("Failed to fetch watchlist");
