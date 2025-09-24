@@ -142,6 +142,33 @@ app.get("/api/watchlist", async (req, res) => {
   }
 });
 
+//Endpoint 3: remove coin from watchlist 
+app.delete("/api/watchlist/:recordId", async (req, res) => {
+  try {
+    const { recordId } = req.params;
+    const response = await fetch(
+      `${AIRTABLE_BASE_URL}/${AIRTABLE_TABLE_NAME}/${recordId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${AIRTABLE_API_KEY}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to delete record");
+    }
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("Error deleting record:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 //listening to the port 3001 now
 app.listen(PORT, () => {
   console.log(`listening to proxy server ${PORT}`);
