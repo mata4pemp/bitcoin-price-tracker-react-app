@@ -16,6 +16,8 @@ Key features:
 
 Screenshot:
 
+![alt text](image.png)
+
 ---
 
 Live Demo:
@@ -40,7 +42,26 @@ Component
    Form to add coins to watchlist
    addCoin
 
----
+---------
+
+Structure of my app:
+bitcoin-price-tracker-react-app/
+├── Frontend-client/
+│   ├── src/
+│   │   ├── components/
+│   │   │   └── [your component files]
+│   │   ├── services/
+│   │   │   ├── airtable.js
+│   │   │   └── coingecko.js
+│   │   ├── styles/
+│   │   │   └── [your CSS modules]
+│   │   └── utils/
+│   │       └── ErrorBoundary.jsx
+│   └── public/
+└── proxy-server/
+    └── server.js
+
+-------
 
 Props (4)
 • title → NavBar
