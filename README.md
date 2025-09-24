@@ -16,7 +16,7 @@ Key features:
 
 Screenshot:
 
-![Bitcoin Tracker App Screenshot](./assets/images/bitcoin-tracker-screenshot.png)
+![Bitcoin Tracker App Screenshot](./image.png)
 
 ---
 
