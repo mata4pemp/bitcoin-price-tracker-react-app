@@ -1,10 +1,10 @@
 Bitcoin Tracker App
-<<<<<<< HEAD
+
 =======
 
 1. App Overview
 
-Bitcoin Tracker App is a simple React application that allows users to view Bitcoin metrics (price, market cap, 24h change) and add coins to a watchlist. The app demonstrates basic React concepts including state management, props, component structure, and routing.
+Bitcoin Tracker App is a simple React application that allows users to view Bitcoin metrics (price, market cap, 24h change) and add coins to a watchlist.
 
 Key features:
 • Fetches live Bitcoin data from a public API
@@ -16,11 +16,7 @@ Key features:
 
 Screenshot:
 
-![alt text](image.png)
-
----
-
-Live Demo:
+![Bitcoin Tracker App Screenshot](./assets/images/bitcoin-tracker-screenshot.png)
 
 ---
 
@@ -42,26 +38,26 @@ Component
    Form to add coins to watchlist
    addCoin
 
----------
+---
 
 Structure of my app:
 bitcoin-price-tracker-react-app/
 ├── Frontend-client/
-│   ├── src/
-│   │   ├── components/
-│   │   │   └── [your component files]
-│   │   ├── services/
-│   │   │   ├── airtable.js
-│   │   │   └── coingecko.js
-│   │   ├── styles/
-│   │   │   └── [your CSS modules]
-│   │   └── utils/
-│   │       └── ErrorBoundary.jsx
-│   └── public/
+│ ├── src/
+│ │ ├── components/
+│ │ │ └── [your component files]
+│ │ ├── services/
+│ │ │ ├── airtable.js
+│ │ │ └── coingecko.js
+│ │ ├── styles/
+│ │ │ └── [your CSS modules]
+│ │ └── utils/
+│ │ └── ErrorBoundary.jsx
+│ └── public/
 └── proxy-server/
-    └── server.js
+└── server.js
 
--------
+---
 
 Props (4)
 • title → NavBar
