@@ -30,3 +30,21 @@ export const getWatchlist = async () => {
     throw error;
   }
 };
+
+export const removeCoinFromWatchlist = async (recordId) => {
+  try {
+    const response = await fetch(
+      `http://localhost:3001/api/watchlist/${recordId}`,
+      {
+        method: "DELETE",
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to remove coin");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error removing coin:", error);
+    throw error;
+  }
+};

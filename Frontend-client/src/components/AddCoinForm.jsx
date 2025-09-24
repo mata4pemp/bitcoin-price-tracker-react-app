@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 // pass down addCoin as a prop from app.jsx
-function AddCoinForm({ addCoin }) {
+function AddCoinForm({ addCoin, onCoinAdded }) {
   const [coinName, setCoinName] = useState("");
   const [validCoins, setValidCoins] = useState([]);
   const [error, setError] = useState("");
@@ -24,7 +24,7 @@ function AddCoinForm({ addCoin }) {
   }, []);
 
   //when form submits, this happens
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(coinName);
     const coin = coinName.trim().toLowerCase();
@@ -39,7 +39,8 @@ function AddCoinForm({ addCoin }) {
       return;
     }
 
-    addCoin(coin); //add coin user search for to the watchlist
+    await addCoin(coin); //add coin user search for to the watchlist
+    onCoinAdded();
     setCoinName(""); //clear the input field after submit
     setError(""); //reset error state to nothing if coin is found on submit
   };

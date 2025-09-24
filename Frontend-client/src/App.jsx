@@ -5,6 +5,7 @@ import BitcoinHomePage from "./components/BitcoinHomePage";
 import WatchlistPage from "./components/WatchlistPage";
 import { handleUpdateAirtable } from "../services/airtable";
 import "./App.css";
+import { removeCoinFromWatchlist } from "../services/airtable";
 
 function App() {
   const [watchlist, setWatchList] = useState([]);
@@ -45,9 +46,14 @@ function App() {
   };
 
   //remove the coin from the watchlist
-  const removeCoin = (coinName) => {
-    //prev = current list of coins in the watchlist, .filter = makes a new list without the coin you want to remove, so 'solana' disappears from page
-    setWatchList((prev) => prev.filter((c) => c !== coinName));
+  const removeCoin = async (recordId) => {
+    try {
+      await removeCoinFromWatchlist(recordId);
+      //prev = current list of coins in the watchlist, .filter = makes a new list without the coin you want to remove, so 'solana' disappears from page
+      setWatchlist((prev) => prev.filter((coin) => coin.id !== recordId));
+    } catch (error) {
+      console.error("Error removing coin:", error);
+    }
   };
 
   return (
