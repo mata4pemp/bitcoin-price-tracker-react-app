@@ -12,10 +12,11 @@ function App() {
 
   //New coin added to the watchlist when pressed, whichever coin person adds to the watchlist, updates the state to the watchlist
   const addCoin = async (coinName) => {
+    console.log("this is coinName", coinName)
     const lowerCaseCoin = coinName.toLowerCase();
-
+   
     //prevent user from adding 2 of the same coins to the watchlist
-    if (watchlist.some((coin) => coin.toLowerCase() === lowerCaseCoin)) {
+    if (watchlist.includes(lowerCaseCoin)) {
       alert(
         `${coinName} is already added to your watchlist, choose another coin!`
       );
@@ -50,7 +51,7 @@ function App() {
     try {
       await removeCoinFromWatchlist(recordId);
       //prev = current list of coins in the watchlist, .filter = makes a new list without the coin you want to remove, so 'solana' disappears from page
-      setWatchlist((prev) => prev.filter((coin) => coin.id !== recordId));
+      setWatchList((prev) => prev.filter((coin) => coin.id !== recordId));
     } catch (error) {
       console.error("Error removing coin:", error);
     }
@@ -72,6 +73,7 @@ function App() {
               {/* pass down props for watchlist and coinName function  */}
               <WatchlistPage
                 watchlist={watchlist}
+                setWatchList={setWatchList}
                 addCoin={addCoin}
                 removeCoin={removeCoin}
               />

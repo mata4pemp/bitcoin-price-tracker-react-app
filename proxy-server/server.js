@@ -66,12 +66,33 @@ app.get("/api/search/coins", async (req, res) => {
   }
 });
 
+//Endpoint 3: Validation for the form, addcoinform search the coins whether in the coingecko API
+app.get("/api/search/validate-coins", async (req, res) => {
+  try {
+    const response = await fetch("https://api.coingecko.com/api/v3/coins/list");
+    
+    console.log("this is res proxy",res);
+    //data = {bitcoin, symbol, etc...}
+    if (!response.ok) {
+      throw new Error("Error fetching coin data");
+    }
+    const data = await response.json();
+    res.json(data);
+
+    //update state, goes through the list of coins via their ID: bitcoin, etherermy, coin name
+    // setValidCoins(data.map((coin) => coin.id.toLowerCase()));
+  } catch (err) {
+    console.error("Error fetching coin data", err);
+    res.status(500).json({ error: err.mesage })
+  }
+});
+
 // AIRTABLE endpoints / proxy <> Airtable API actions
 
 // Endpoint 1: Add coin to watchlist, send coin to airtable DB table
 app.post("/airtable/send", async (req, res) => {
   try {
-    console.log(req.body)
+    console.log(req.body);
     const coinData = req.body;
     //want to POST send data to airtable to create new row in table
     const response = await fetch(
@@ -142,7 +163,7 @@ app.get("/api/watchlist", async (req, res) => {
   }
 });
 
-//Endpoint 3: remove coin from watchlist 
+//Endpoint 3: remove coin from watchlist
 app.delete("/api/watchlist/:recordId", async (req, res) => {
   try {
     const { recordId } = req.params;
@@ -167,7 +188,6 @@ app.delete("/api/watchlist/:recordId", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
 
 //listening to the port 3001 now
 app.listen(PORT, () => {

@@ -27,6 +27,18 @@ export const searchCoins = async (query) => {
   }
 };
 
+//function to pull coin name for form validation through proxy
+export const searchCoinsFormValidation = async () => {
+  try {
+    const res = await fetch(`http://localhost:3001/api/search/validate-coins`);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error searching coins:", error);
+    throw error;
+  }
+};
+
 //function to add coin coin to watchlist through proxy
 export const addCoinToWatchlist = async (coinData) => {
   try {
