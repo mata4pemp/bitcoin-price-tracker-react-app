@@ -70,6 +70,7 @@ function AddCoinForm({ addCoin, onCoinAdded, watchlist, setWatchList }) {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
+          className="rounded-md border border-solid p-2 m-2"
           placeholder="Which coin do you want to add to watchlist?"
           value={coinName}
           //   {/* Whatever is inputted into the form update state */}
