@@ -1,18 +1,23 @@
 import { useState, useEffect } from "react";
 import { searchCoinsFormValidation } from "../../services/coingecko";
 
-// pass down addCoin as a prop from app.jsx
+// pass down props from app.jsx
 function AddCoinForm({ addCoin, onCoinAdded, watchlist, setWatchList }) {
+
+  //stores what user types in the field
   const [coinName, setCoinName] = useState("");
+  //stores all valid coins from coingecko for validation
   const [validCoins, setValidCoins] = useState([]);
+  //stores error message displayed to the user
   const [error, setError] = useState("");
 
   //Pull xternal data: fetch coin data for the watchlist
   useEffect(() => {
     const fetchCoin = async () => {
       try {
+        //fetch list of valid coins from coingecko
         const res = await searchCoinsFormValidation();
-        console.log("this is res", res);
+        // save the list of valid coins to state for form validation
         setValidCoins(res);
       } catch (err) {
         console.error("Error fetching coin data:", err);
@@ -24,14 +29,11 @@ function AddCoinForm({ addCoin, onCoinAdded, watchlist, setWatchList }) {
   //when form submits, this happens
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(coinName);
     const coin = coinName.trim().toLowerCase();
-    // console.log(coin)
-    console.log("this is handlesubmit", validCoins);
 
     if (!coin) return; //prevents empty submit on the form
 
-    // Check if coin exists in Coingecko API
+    // Check if coin exists in Coingecko API:returns tru if coin matches
     const coinExists = validCoins.some((c) => c.id.toLowerCase() === coin);
     if (!coinExists) {
       setError("Cannot find your coin name from Coingecko API. Try another.");
@@ -51,15 +53,15 @@ function AddCoinForm({ addCoin, onCoinAdded, watchlist, setWatchList }) {
       // Add coin to Airtable
       await addCoin(coin);
 
-      // Update watchlist in App.jsx immediately
+      // Update watchlist in App.jsx immediately, update UI locally + add the new coin to the watchlist
       setWatchList([
         ...watchlist,
-        { id: coin, fields: { Name: coin } }, // temporary local update
+        { id: coin, fields: { Name: coin } }, 
       ]);
 
       onCoinAdded(); // trigger any parent refresh
-      setCoinName("");
-      setError("");
+      setCoinName(""); // clear input field
+      setError(""); // clear error messages
     } catch (err) {
       console.error("Error adding coin:", err);
       setError("Failed to add coin. Try again.");
@@ -81,8 +83,7 @@ function AddCoinForm({ addCoin, onCoinAdded, watchlist, setWatchList }) {
           Add Coin To Watchlist
         </button>
       </form>
-      {/* if error = truthy, or if there is an error, show error message that coin
-      is not found */}
+      {/* if error = truthy, show the error */}
       {error && <p style={{ color: "red" }}>{error}</p>}
     </>
   );

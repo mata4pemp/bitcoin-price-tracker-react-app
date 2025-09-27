@@ -1,10 +1,13 @@
 //code for my proxy server
 
+// Req > sends request from react frontend >  proxy > external API
+// Res > sends data from API > proxy server > client/ react frontend
+
 //load my keys from env into the project
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const fetch = require("node-fetch");
+require("dotenv").config(); //load .env files into process.env, where API keys live
+const express = require("express"); //express framework
+const cors = require("cors"); //cors middlewear to allow react frontend to access this proxy server
+const fetch = require("node-fetch"); //lets server make HTTP requests to airtable/coingecko
 
 //create an insatnace of express
 const app = express();
@@ -26,10 +29,10 @@ const COINGECKO_BASE_URL = "https://api.coingecko.com/api/v3/";
 
 // CoinGecko endpoints / proxy <> Airtable API actions
 
-// Endpoint 1: Get coin data from Coingecko
+// Endpoint 1: Get coin data from Coingecko (Market cap/24h vol/24h change)
 app.get("/api/coins/:coinId", async (req, res) => {
   try {
-    const { coinId } = req.params;
+    const { coinId } = req.params; //assign coin name from url,put in a variable called coinID
     const response = await fetch(
       `${COINGECKO_BASE_URL}/simple/price?ids=${coinId}&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true`
     );
@@ -48,10 +51,10 @@ app.get("/api/coins/:coinId", async (req, res) => {
   }
 });
 
-//Endpoint 2: Search for coins from coingecko
+//Endpoint 2: Search for coins on frontend from coingecko by user query
 app.get("/api/search/coins", async (req, res) => {
   try {
-    const { query } = req.query;
+    const { query } = req.query; //what user searchers on query put it into variable called query
     const response = await fetch(`${COINGECKO_BASE_URL}/search?query=${query}`);
 
     if (!response.ok) {
@@ -66,7 +69,7 @@ app.get("/api/search/coins", async (req, res) => {
   }
 });
 
-//Endpoint 3: Validation for the form, addcoinform search the coins whether in the coingecko API
+//Endpoint 3: Fetches a list of all coins from coingecko, Validation for the form, used in addcoinform.jsx search the coins whether in the coingecko API
 app.get("/api/search/validate-coins", async (req, res) => {
   try {
     const response = await fetch("https://api.coingecko.com/api/v3/coins/list");
@@ -89,7 +92,7 @@ app.get("/api/search/validate-coins", async (req, res) => {
 
 // AIRTABLE endpoints / proxy <> Airtable API actions
 
-// Endpoint 1: Add coin to watchlist, send coin to airtable DB table
+// Endpoint 1: User Adds coin to watchlist, send coin to airtable DB table
 app.post("/airtable/send", async (req, res) => {
   try {
     console.log(req.body);
@@ -136,7 +139,7 @@ app.post("/airtable/send", async (req, res) => {
   }
 });
 
-// Endpoint 2: get watchlist from Airtable
+// Endpoint 2: get watchlist from Airtable, shows it on the react frontend
 app.get("/api/watchlist", async (req, res) => {
   try {
     const response = await fetch(
@@ -163,7 +166,7 @@ app.get("/api/watchlist", async (req, res) => {
   }
 });
 
-//Endpoint 3: remove coin from watchlist
+//Endpoint 3: Remove a coin from airtable using recordID 
 app.delete("/api/watchlist/:recordId", async (req, res) => {
   try {
     const { recordId } = req.params;

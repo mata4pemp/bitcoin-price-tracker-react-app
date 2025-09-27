@@ -1,8 +1,6 @@
-//open this when using proxy server, when testing in browser hardcore base ID and API key
-// const BASE_URL = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}`;
+// react components call on the functions in these file, to talk to your proxy server, which talks to airtable
 
-// const API_KEY = process.env.REACT_APP_AIRTABLE_TOKEN_ID;
-
+//Sends new data from the app to airtable 
 export const handleUpdateAirtable = async (newData) => {
   try {
     const res = await fetch("http://localhost:3001/airtable/send", {
@@ -17,6 +15,7 @@ export const handleUpdateAirtable = async (newData) => {
   }
 };
 
+//fetches the list of coins saved in my airtable watchlist table
 export const getWatchlist = async () => {
   try {
     const res = await fetch("http://localhost:3001/api/watchlist");
@@ -31,6 +30,7 @@ export const getWatchlist = async () => {
   }
 };
 
+//deletes a coin from the airtable table by its recordID
 export const removeCoinFromWatchlist = async (recordId) => {
   try {
     const response = await fetch(

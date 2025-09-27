@@ -13,11 +13,13 @@ function formatLargeNumber(num) {
 function BitcoinHomePage() {
   const [bitcoin, setBitcoin] = useState(null);
 
-  //useffect allows fetching data from api, side effects tasks outside of rendering of screen
+  //useffect allows fetching data from api
   useEffect(() => {
     const fetchBitcoinData = async () => {
       try {
+        //call API to get bitcoin data
         const data = await getCoinData("bitcoin");
+        //update state with bitcoin data
         setBitcoin(data.bitcoin);
       } catch (error) {
         console.error("Error fetching BTC data", error);
@@ -29,17 +31,14 @@ function BitcoinHomePage() {
     //useffect only runs one when page loads
   }, []);
 
-  //no data comes in at least we show something
+  //no data comes in cause of rate limits at least we show something
   if (!bitcoin) return <p>Please be patient, loading data...</p>;
 
   return (
     <>
-      {/* Pulling the JSON properties from the proxy < coingecko data, optional chaining similar to prop drilling, drill down the JSON object */}
-      {/* {pulling from endpoint 1:https://docs.coingecko.com/v3.0.1/reference/coins-id-history} */}
+      {/* {pulling from endpoint 1:https://docs.coingecko.com/v3.0.1/reference/coins-id-history}, localestring adds commas */}
       <h1>Bitcoin Price (USD): ${bitcoin?.usd.toLocaleString()} </h1>
-      <h1>
-        Market Cap (USD): ${formatLargeNumber(bitcoin?.usd_market_cap)}
-      </h1>
+      <h1>Market Cap (USD): ${formatLargeNumber(bitcoin?.usd_market_cap)}</h1>
       {/* {pulling from endpoint 1:https://docs.coingecko.com/reference/simple-price} */}
       <h1>
         Price 24H Volume Traded: $

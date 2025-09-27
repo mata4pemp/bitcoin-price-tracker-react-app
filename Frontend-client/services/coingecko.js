@@ -1,21 +1,18 @@
-// [For Each Coin] USD + Market Cap + USD 24h Change = Endpoint 1=  https://pro-api.coingecko.com/api/v3/simple/price
-// https://docs.coingecko.com/reference/simple-price
+//this file contains functions that have your app talk to the proxy server (localhost: 3001)
 
-// i need to change this to localhost: 30000/
-
-// function to get data for a coin using the proxy server
+// function to get price data for a specific coin/Bitcoin
 export const getCoinData = async (coinId = "Bitcoin") => {
   try {
-    const res = await fetch(`http://localhost:3001/api/coins/${coinId}`);
-    return await res.json();
-  } catch (error) {
+    const res = await fetch(`http://localhost:3001/api/coins/${coinId}`); //make a request to local server
+    return await res.json(); //convert response I get from proxy to JSON
+  } catch (error) { //if something fails, catch the error
     console.error("Error fetching coin data:", error);
     throw error;
   }
 };
 
-// function to search for coins using proxy server
-export const searchCoins = async (query) => {
+// function to let users search for coin by name
+export const searchCoins = async (query) => { //query = what the user types into search bar
   try {
     const res = await fetch(
       `http://localhost:3001/api/coins/api/search/coins?query=${query}`
@@ -27,7 +24,7 @@ export const searchCoins = async (query) => {
   }
 };
 
-//function to pull coin name for form validation through proxy
+//function to fetch a list of all valid coins for validate user input (user types bitcoin, check against this list)
 export const searchCoinsFormValidation = async () => {
   try {
     const res = await fetch(`http://localhost:3001/api/search/validate-coins`);
@@ -39,7 +36,7 @@ export const searchCoinsFormValidation = async () => {
   }
 };
 
-//function to add coin coin to watchlist through proxy
+//function to add a coin to users watchlist saved in airtable
 export const addCoinToWatchlist = async (coinData) => {
   try {
     const res = await fetch("http://localhost:3001/api/watchlist/add", {
@@ -54,23 +51,3 @@ export const addCoinToWatchlist = async (coinData) => {
     throw error;
   }
 };
-
-// IGNORE: PREVIOUS code to get BTC data from coingecko API
-// export async function getBitcoinData() {
-//   try {
-//     const res = await fetch(
-//       `${BASE_URL}/simple/price?ids=bitcoin&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24h_change=true`
-//     );
-//     if (!res.ok) {
-//       throw new Error("Failed to fetch coingecko data");
-//     }
-
-//     const data = await res.json();
-//     console.log("API response", data); //RMB comment this out for presentation
-
-//     return data; //return bitcoin data from coingecko as a jS object
-//   } catch (error) {
-//     console.error(error);
-//     throw error;
-//   }
-// }
