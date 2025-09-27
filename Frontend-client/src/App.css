@@ -40,3 +40,96 @@
 .read-the-docs {
   color: #888;
 }
+
+nav {
+  display: flex;
+  justify-content: center; /* centers nav items horizontally */
+  margin: 20px 0;          /* optional spacing above/below */
+}
+
+nav ul {
+  list-style: none;       /* remove bullets */
+  padding: 0;
+  margin: 0;
+  display: flex;          /* make list items horizontal */
+  gap: 1.5rem;            /* spacing between items */
+}
+
+nav li {
+  display: inline;
+}
+
+nav a {
+  text-decoration: none;
+  color: #f7931a;
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: #747bff;
+}
+
+.navbar-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 2px solid #f7931a;  /* orange Bitcoin color */
+  border-radius: 8px;         /* optional rounded corners */
+  padding: 10px 20px;
+  background-color: #1a1a1a;  /* dark background for contrast */
+  width: fit-content;         /* shrink to fit nav content */
+  margin: 20px auto;          /* center the box horizontally */
+}
+
+.navbar-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar-box li {
+  display: inline;
+}
+
+.navbar-box a {
+  text-decoration: none;
+  color: #f7931a;
+  font-weight: 600;
+}
+
+.navbar-box a:hover {
+  color: #747bff;
+}
+
+.orange-btn {
+  background-color: #f7931a;
+  color: #000000;
+  border: none;
+  padding: 0.6em 1.2em;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.orange-btn:hover {
+  background-color: #d97c16;
+}
+
+.remove-btn {
+  background-color: #1a1a1a; /* same dark background as your other buttons */
+  color: white;
+  border: none;
+  padding: 0.6em 1.2em;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+
+.remove-btn:hover {
+  background-color: red;  /* turns red when hovered */
+}

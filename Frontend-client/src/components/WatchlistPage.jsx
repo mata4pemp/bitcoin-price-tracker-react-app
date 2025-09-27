@@ -38,7 +38,7 @@ function WatchlistPage({ watchlist, setWatchList, addCoin, removeCoin }) {
 
   return (
     <>
-      <h1>My Crypto Watchlist</h1>
+      <h1>My Crypto Watchlist 🚀</h1>
       <AddCoinForm
         addCoin={addCoin}
         onCoinAdded={handleCoinAdded}
@@ -51,7 +51,12 @@ function WatchlistPage({ watchlist, setWatchList, addCoin, removeCoin }) {
           .map((coin) => (
             <div key={coin.id}>
               <span>{coin.fields.Name}</span>
-              <button onClick={() => handleRemove(coin.id)}>Remove</button>
+              <button
+                className="remove-btn"
+                onClick={() => handleRemove(coin.id)}
+              >
+                Remove
+              </button>
             </div>
           ))}
       </ul>

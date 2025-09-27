@@ -76,7 +76,9 @@ function AddCoinForm({ addCoin, onCoinAdded, watchlist, setWatchList }) {
           onChange={(e) => setCoinName(e.target.value)}
           required
         ></input>
-        <button type="submit">Add Coin To Watchlist</button>
+        <button type="submit" className="orange-btn">
+          Add Coin To Watchlist
+        </button>
       </form>
       {/* if error = truthy, or if there is an error, show error message that coin
       is not found */}
