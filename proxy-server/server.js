@@ -3,11 +3,16 @@
 // Req > sends request from react frontend >  proxy > external API
 // Res > sends data from API > proxy server > client/ react frontend
 
+	// express → runs your server and endpoints
+	// cors → allows React frontend to talk to your server
+	// fetch / node-fetch → lets your server talk to external API coingecko/airtable
+	// dotenv → loads your secret keys safely
+
 //load my keys from env into the project
 require("dotenv").config(); //load .env files into process.env, where API keys live
 const express = require("express"); //express framework
 const cors = require("cors"); //cors middlewear to allow react frontend to access this proxy server
-const fetch = require("node-fetch"); //lets server make HTTP requests to airtable/coingecko
+const fetch = require("node-fetch"); //i know we have fetch in node v18, but putting this to ensure we have latest fetch,lets server make HTTP requests to airtable/coingecko
 
 //create an insatnace of express
 const app = express();
@@ -51,28 +56,28 @@ app.get("/api/coins/:coinId", async (req, res) => {
   }
 });
 
-//Endpoint 2: Search for coins on frontend from coingecko by user query
-app.get("/api/search/coins", async (req, res) => {
-  try {
-    const { query } = req.query; //what user searchers on query put it into variable called query
-    const response = await fetch(`${COINGECKO_BASE_URL}/search?query=${query}`);
+//Endpoint 2: Whatever user type in form coin, Search for coins from coingecko by user query
+// app.get("/api/search/coins", async (req, res) => {
+//   try {
+//     const { query } = req.query; //what user searchers on query put it into variable called query
+//     const response = await fetch(`${COINGECKO_BASE_URL}/search?query=${query}`);
 
-    if (!response.ok) {
-      throw new Error("failed to find coin");
-    }
+//     if (!response.ok) {
+//       throw new Error("failed to find coin");
+//     }
 
-    const data = await response.json();
-    res.json(data);
-  } catch (error) {
-    console.error("Error finding coins during search", error);
-    res.status(500).json({ error: error.message });
-  }
-});
+//     const data = await response.json();
+//     res.json(data);
+//   } catch (error) {
+//     console.error("Error finding coins during search", error);
+//     res.status(500).json({ error: error.message });
+//   }
+// });
 
-//Endpoint 3: Fetches a list of all coins from coingecko, Validation for the form, used in addcoinform.jsx search the coins whether in the coingecko API
+//Endpoint 2: Fetches a list of all coins from coingecko, Validation for the form, used in addcoinform.jsx search the coins whether in the coingecko API
 app.get("/api/search/validate-coins", async (req, res) => {
   try {
-    const response = await fetch("https://api.coingecko.com/api/v3/coins/list");
+    const response = await fetch(`${COINGECKO_BASE_URL}/coins/list`);
     
     console.log("this is res proxy",res);
     //data = {bitcoin, symbol, etc...}
@@ -86,7 +91,7 @@ app.get("/api/search/validate-coins", async (req, res) => {
     // setValidCoins(data.map((coin) => coin.id.toLowerCase()));
   } catch (err) {
     console.error("Error fetching coin data", err);
-    res.status(500).json({ error: err.mesage })
+    res.status(500).json({ error: err.message })
   }
 });
 
@@ -95,7 +100,7 @@ app.get("/api/search/validate-coins", async (req, res) => {
 // Endpoint 1: User Adds coin to watchlist, send coin to airtable DB table
 app.post("/airtable/send", async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     const coinData = req.body;
     //want to POST send data to airtable to create new row in table
     const response = await fetch(
@@ -135,7 +140,7 @@ app.post("/airtable/send", async (req, res) => {
   } catch (error) {
     console.error("error adding coin data to aritable", error);
     //code knows the coin is not succesful when added with
-    res.status(500).json({ error: error.mesage });
+    res.status(500).json({ error: error.message });
   }
 });
 
@@ -152,7 +157,7 @@ app.get("/api/watchlist", async (req, res) => {
       }
     );
 
-    console.log(response);
+    // console.log(response);
 
     if (!response.ok) {
       throw new Error("Failed to fetch watchlist");

@@ -28,7 +28,7 @@ function AddCoinForm({ addCoin, onCoinAdded, watchlist, setWatchList }) {
 
   //when form submits, this happens
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); //prevents default behavior: page refresh, no form spasm
     const coin = coinName.trim().toLowerCase();
 
     if (!coin) return; //prevents empty submit on the form

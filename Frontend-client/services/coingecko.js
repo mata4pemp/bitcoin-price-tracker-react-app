@@ -11,18 +11,18 @@ export const getCoinData = async (coinId = "Bitcoin") => {
   }
 };
 
-// function to let users search for coin by name
-export const searchCoins = async (query) => { //query = what the user types into search bar
-  try {
-    const res = await fetch(
-      `http://localhost:3001/api/coins/api/search/coins?query=${query}`
-    );
-    return await res.json();
-  } catch (error) {
-    console.error("Error searching coins:", error);
-    throw error;
-  }
-};
+// // function to let users search for coin by name
+// export const searchCoins = async (query) => { //query = what the user types into search bar
+//   try {
+//     const res = await fetch(
+//       `http://localhost:3001/api/coins/api/search/coins?query=${query}`
+//     );
+//     return await res.json();
+//   } catch (error) {
+//     console.error("Error searching coins:", error);
+//     throw error;
+//   }
+// };
 
 //function to fetch a list of all valid coins for validate user input (user types bitcoin, check against this list)
 export const searchCoinsFormValidation = async () => {

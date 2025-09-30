@@ -12,7 +12,6 @@ function App() {
 
   //New coin added to the watchlist when pressed, whichever coin person adds to the watchlist, updates the state to the watchlist
   const addCoin = async (coinName) => {
-    console.log("this is coinName", coinName)
     const lowerCaseCoin = coinName.toLowerCase();
    
     //prevent user from adding 2 of the same coins to the watchlist
@@ -24,11 +23,9 @@ function App() {
     }
 
     //add new coin to the previous coins in watchlist, prev = current list of coins in the watchlist
-    console.log(watchlist);
     setWatchList((prev) => [...prev, coinName]);
-    console.log(watchlist);
 
-    //push the coin to Airtable
+    //push the coin to Airtable, handleupdateAirtable function comes from services > airtable
     try {
       const result = await handleUpdateAirtable(
         { name: coinName },
@@ -46,11 +43,11 @@ function App() {
     }
   };
 
-  //remove the coin from the watchlist
+  //remove the coin from the watchlist, removecoin function from airtable services folder
   const removeCoin = async (recordId) => {
     try {
       await removeCoinFromWatchlist(recordId);
-      //prev = current list of coins in the watchlist, .filter = makes a new list without the coin you want to remove, so 'solana' disappears from page
+      //prev = current state, list of coins in the watchlist, for each coin in array, check if coin.id not equal to recordID, if true= keep coin in  new array, if false, exclude coin from new array ,.filter = makes a new list without the coin you want to remove, so 'solana' disappears from page
       setWatchList((prev) => prev.filter((coin) => coin.id !== recordId));
     } catch (error) {
       console.error("Error removing coin:", error);

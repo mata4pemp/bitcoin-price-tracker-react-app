@@ -8,8 +8,8 @@ export const handleUpdateAirtable = async (newData) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newData),
     });
-    const data = await res.json();
-    return res;
+    const data = await res.json(); 
+    return res; 
   } catch (error) {
     console.log(error.message);
   }
