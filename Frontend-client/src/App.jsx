@@ -14,16 +14,7 @@ function App() {
   const addCoin = async (coinName) => {
     const lowerCaseCoin = coinName.toLowerCase();
    
-    //prevent user from adding 2 of the same coins to the watchlist
-    if (watchlist.includes(lowerCaseCoin)) {
-      alert(
-        `${coinName} is already added to your watchlist, choose another coin!`
-      );
-      return;
-    }
-
-    //add new coin to the previous coins in watchlist, prev = current list of coins in the watchlist
-    setWatchList((prev) => [...prev, coinName]);
+  
 
     //push the coin to Airtable, handleupdateAirtable function comes from services > airtable
     try {
