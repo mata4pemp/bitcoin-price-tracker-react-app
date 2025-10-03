@@ -49,7 +49,7 @@ function WatchlistPage({ watchlist, setWatchList, addCoin, removeCoin }) {
       />
       <ul>
         {watchlist
-          .filter((coin) => coin && coin.fields && coin.fields.Name) // Only keep coins that are valid, Filter out invalid entries
+          .filter((coin) => coin && coin.fields && coin.fields.Name) // Only keep coins that are valid, Checks if coin exists, have a fields property, and fields have a name property, Filter out invalid entries
           .map((coin) => ( // for each coin in watchlist create name remove button
             <div key={coin.id}>
               <span>{coin.fields.Name}</span>

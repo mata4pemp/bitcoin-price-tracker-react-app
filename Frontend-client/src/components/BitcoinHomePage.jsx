@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getCoinData } from "../../services/coingecko";
+import Saylor from "./Saylor";
 
 //make the displayed numbers prettier, with trillion/billion text
 function formatLargeNumber(num) {
@@ -36,6 +37,7 @@ function BitcoinHomePage() {
 
   return (
     <>
+    <Saylor />
       {/* {pulling from endpoint 1:https://docs.coingecko.com/v3.0.1/reference/coins-id-history}, localestring adds commas */}
       <h1>Bitcoin Price (USD): ${bitcoin?.usd.toLocaleString()} </h1>
       <h1>Market Cap (USD): ${formatLargeNumber(bitcoin?.usd_market_cap)}</h1>

@@ -37,7 +37,7 @@ const COINGECKO_BASE_URL = "https://api.coingecko.com/api/v3/";
 // Endpoint 1: Get coin data from Coingecko (Market cap/24h vol/24h change)
 app.get("/api/coins/:coinId", async (req, res) => {
   try {
-    const { coinId } = req.params; //assign coin name from url,put in a variable called coinID
+    const { coinId } = req.params; //extracting from my app URL parameter and saving it into CoinID, assign coin name from url,put in a variable called coinID
     const response = await fetch(
       `${COINGECKO_BASE_URL}/simple/price?ids=${coinId}&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true`
     );
