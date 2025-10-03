@@ -16,7 +16,7 @@ Key features:
 
 Screenshot:
 
-![Bitcoin Tracker App Screenshot](./image.png)
+![Bitcoin Tracker App Screenshot](./homepage.png)
 
 ---
 
@@ -38,19 +38,28 @@ Component
    Form to add coins to watchlist
    addCoin
 
+6. Saylor.jsx
+   Michael Saylor
+
 ---
 
 Structure of my app:
+```bash
 bitcoin-price-tracker-react-app/
 ├── Frontend-client/
 │ ├── src/
 │ │ ├── components/
-│ │ │ └── [your component files]
+│ │ │ └── ├── App.jsx              # Root component, holds main state (bitcoin watchlist)
+│   │   │   ├── NavBar.jsx           # Top navigation links
+│   │   │   ├── Home.jsx             # Displays Bitcoin metrics
+│   │   │   ├── Watchlist.jsx        # Shows coins in watchlist
+│   │   │   ├── AddCoinForm.jsx      # Form to add coins to watchlist (addCoin)
+│   │   │   └── Saylor.jsx  
 │ │ ├── services/
 │ │ │ ├── airtable.js
 │ │ │ └── coingecko.js
 │ │ ├── styles/
-│ │ │ └── [your CSS modules]
+│ │ │ └── App.css
 │ │ └── utils/
 │ │ └── ErrorBoundary.jsx
 │ └── public/
@@ -141,12 +150,3 @@ Expanding the ESLint configuration
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the TS template for information on how to integrate TypeScript and typescript-eslint in your project.
 
 ---
-
-Component Hierarchy
-
-App.jsx (root)
-├─ NavBar.jsx <-- navigation links
-├─ Routes
-│ ├─ "/" → BitcoinHomePage.jsx (Bitcoin metrics)
-│ └─ "/watchlist" → WatchlistPage.jsx
-│ └─ AddCoinForm.jsx (inside Watchlist page)
