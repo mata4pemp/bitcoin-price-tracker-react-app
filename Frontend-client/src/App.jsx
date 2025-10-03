@@ -11,10 +11,8 @@ function App() {
   const [watchlist, setWatchList] = useState([]);
 
   //New coin added to the watchlist when pressed, whichever coin person adds to the watchlist, updates the state to the watchlist
-  const addCoin = async (coinName) => {
-    const lowerCaseCoin = coinName.toLowerCase();
+  const addCoin = async (coinName) => { //coinName is the coin user adds to form
    
-  
 
     //push the coin to Airtable, handleupdateAirtable function comes from services > airtable
     try {
